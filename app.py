@@ -1,6 +1,5 @@
 import os
 import telebot
-import time
 from flask import Flask, request
 
 bot_token = "824978965:AAGYUamuCMH_FupAN_z-axubukiiGB6Gd4g"
