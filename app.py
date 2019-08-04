@@ -25,7 +25,7 @@ def getMessage():
 @server.route("/")
 def webhook():
     bot.remove_webhook()
-    bot.set_webhook(url = " https://telegarm-anan.herokuapp.com/" + bot_token)
+    bot.set_webhook(url = "https://telegarm-anan.herokuapp.com/" + bot_token)
     return "!", 200
 
 if __name__ == "__main__":
