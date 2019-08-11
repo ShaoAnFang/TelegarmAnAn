@@ -1,34 +1,50 @@
-import os
+import configparser
+import logging
+
+import telegram
 from flask import Flask, request
-import telebot
+from telegram.ext import Dispatcher, MessageHandler, Filters
 
-TOKEN = "824978965:AAGYUamuCMH_FupAN_z-axubukiiGB6Gd4g"
-bot = telebot.TeleBot(TOKEN)
-server = Flask(__name__)
+# Load data from config.ini file
+config = configparser.ConfigParser()
+config.read('config.ini')
 
+# Enable logging
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+                    level=logging.INFO)
+logger = logging.getLogger(__name__)
 
-@bot.message_handler(commands=['start'])
-def start(message):
-    bot.reply_to(message, 'Hello, ' + message.from_user.first_name)
+# Initial Flask app
+app = Flask(__name__)
 
-
-@bot.message_handler(func=lambda message: True, content_types=['text'])
-def echo_message(message):
-    # bot.reply_to(message, message.text)
-    bot.send_message(message.text)
-
-@server.route('/' + TOKEN, methods=['POST'])
-def getMessage():
-    bot.process_new_updates([telebot.types.Update.de_json(request.stream.read().decode("utf-8"))])
-    return "!", 200
+# Initial bot by Telegram access token
+bot = telegram.Bot(token=(config['TELEGRAM']['ACCESS_TOKEN']))
 
 
-@server.route("/")
-def webhook():
-    bot.remove_webhook()
-    bot.set_webhook(url='https://telegarm-anan.herokuapp.com/' + TOKEN)
-    return "!", 200
+@app.route('/hook', methods=['POST'])
+def webhook_handler():
+    """Set route /hook with POST method will trigger this method."""
+    if request.method == "POST":
+        update = telegram.Update.de_json(request.get_json(force=True), bot)
 
+        # Update dispatcher process that handler to process this message
+        dispatcher.process_update(update)
+    return 'ok'
+
+
+def reply_handler(bot, update):
+    """Reply message."""
+    text = update.message.text
+    update.message.reply_text(text)
+
+
+# New a dispatcher for bot
+dispatcher = Dispatcher(bot, None)
+
+# Add handler for handling message, there are many kinds of message. For this handler, it particular handle text
+# message.
+dispatcher.add_handler(MessageHandler(Filters.text, reply_handler))
 
 if __name__ == "__main__":
-    server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
+    # Running server
+    app.run(debug=True)
