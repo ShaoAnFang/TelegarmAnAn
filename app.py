@@ -1,6 +1,5 @@
 import os
-from flask import Flask, request, send_from_directory, send_file, url_for
-import telebot
+from flask import Flask, request, send_from_directory, send_file
 
 TOKEN = "824978965:AAGYUamuCMH_FupAN_z-axubukiiGB6Gd4g"
 bot = telebot.TeleBot(TOKEN)
@@ -21,6 +20,10 @@ def getMessage():
     bot.process_new_updates([telebot.types.Update.de_json(request.stream.read().decode("utf-8"))])
     return "!", 200
 
+
+@server.route('/edm2020_01/<string:filename>')
+def returnImage(filename):
+    return send_file('/app/upload/{}'.format(filename))
 
 @server.route('/edm2020_02/<string:filename>')
 def returnImage(filename):
