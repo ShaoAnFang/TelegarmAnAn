@@ -22,7 +22,7 @@ def getMessage():
 
 
 @server.route('/edm2020_01/<string:filename>')
-def returnImage(filename):
+def returnImagez(filename):
     return send_file('/app/upload/{}'.format(filename))
 
 @server.route('/edm2020_02/<string:filename>')
