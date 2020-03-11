@@ -25,9 +25,10 @@ def getMessage():
 @server.route('/edm2020_02/<string:filename>')
 def returnImage(filename):
     #return str(os.getcwd())
-    return str(os.listdir())
+    #return str(os.listdir()) 
+    #['upload', 'runtime.txt', 'README.md', 'app.py', 'Procfile', '.heroku', 'requirements.txt', '.profile.d']
     
-    #return send_file('/upload/{}'.format(filename), as_attachment=True)
+    return send_file('/app/upload/{}'.format(filename), as_attachment=True)
     #return send_from_directory(server.config['UPLOAD_FOLDER'], filename, as_attachment=True)
 
 @server.route("/")
