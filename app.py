@@ -22,9 +22,9 @@ def getMessage():
     return "!", 200
 
 
-@server.route('/edm2020_02/edm202002_01.jpg', methods=['GET'])
+@server.route('/edm2020_02', methods=['GET'])
 def returnImage():
-    return send_file("edm202002_01.jpg")
+    return send_static_file("edm202002_01.jpg")
 
 @server.route("/")
 def webhook():
