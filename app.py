@@ -4,7 +4,7 @@ import telebot
 
 TOKEN = "824978965:AAGYUamuCMH_FupAN_z-axubukiiGB6Gd4g"
 bot = telebot.TeleBot(TOKEN)
-server = Flask(__name__, upload_folder='/static')
+server = Flask(__name__, upload_folder='static')
 
 
 @bot.message_handler(commands=['start'])
