@@ -24,7 +24,8 @@ def getMessage():
 
 @server.route('/edm2020_02/<string:filename>')
 def returnImage(filename):
-    return send_file('/upload/{}'.format(filename), as_attachment=True)
+    return '/upload/{}'.format(filename)
+    #return send_file('/upload/{}'.format(filename), as_attachment=True)
     #return send_from_directory(server.config['UPLOAD_FOLDER'], filename)
 
 @server.route("/")
