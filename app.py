@@ -4,7 +4,7 @@ import telebot
 
 TOKEN = "824978965:AAGYUamuCMH_FupAN_z-axubukiiGB6Gd4g"
 bot = telebot.TeleBot(TOKEN)
-server = Flask(__name__)
+server = Flask(__name__, static_url_path='/edm2020_02')
 
 
 @bot.message_handler(commands=['start'])
@@ -21,6 +21,10 @@ def getMessage():
     bot.process_new_updates([telebot.types.Update.de_json(request.stream.read().decode("utf-8"))])
     return "!", 200
 
+
+@server.route('/edm2020_02/edm202002_01.jpg', methods=['GET'])
+def returnImage():
+    return send_file("edm202002_01.jpg")
 
 @server.route("/")
 def webhook():
