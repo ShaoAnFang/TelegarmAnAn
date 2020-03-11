@@ -22,8 +22,8 @@ def getMessage():
     return "!", 200
 
 
-@server.route('/edm2020_02/<path:filename>', methods=['GET'])
-def returnImage():
+@server.route('/edm2020_02/<string:filename>')
+def returnImage(filename):
     return send_from_directory(server.upload_folder, filename)
 
 @server.route("/")
