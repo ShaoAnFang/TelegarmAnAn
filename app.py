@@ -1,10 +1,10 @@
 import os
-from flask import Flask, request, send_from_directory, send_file, url_for
+from flask import Flask, request, send_from_directory, send_file
 
 TOKEN = "824978965:AAGYUamuCMH_FupAN_z-axubukiiGB6Gd4g"
 bot = telebot.TeleBot(TOKEN)
 server = Flask(__name__)
-server.config['UPLOAD_FOLDER'] = '/upload'
+#server.config['UPLOAD_FOLDER'] = '/upload'
 
 @bot.message_handler(commands=['start'])
 def start(message):
@@ -33,6 +33,7 @@ def returnImage(filename):
     return send_file('/app/upload/{}'.format(filename))
     #return send_from_directory(server.config['UPLOAD_FOLDER'], filename, as_attachment=True)
 
+    
 @server.route("/")
 def webhook():
     bot.remove_webhook()
