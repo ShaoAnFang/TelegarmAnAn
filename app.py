@@ -26,7 +26,7 @@ def getMessage():
 def returnImage(filename):
     #return '/upload/{}'.format(filename)
     #return send_file('/upload/{}'.format(filename), as_attachment=True)
-    return send_from_directory(server.config['UPLOAD_FOLDER'], filename)
+    return send_from_directory(server.config['UPLOAD_FOLDER'], filename, as_attachment=True)
 
 @server.route("/")
 def webhook():
