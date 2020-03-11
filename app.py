@@ -5,7 +5,7 @@ import telebot
 TOKEN = "824978965:AAGYUamuCMH_FupAN_z-axubukiiGB6Gd4g"
 bot = telebot.TeleBot(TOKEN)
 server = Flask(__name__)
-server.config['UPLOAD_FOLDER'] = '/static'
+server.config['UPLOAD_FOLDER'] = '/upload'
 
 @bot.message_handler(commands=['start'])
 def start(message):
@@ -24,7 +24,7 @@ def getMessage():
 
 @server.route('/edm2020_02/<string:filename>')
 def returnImage(filename):
-    return send_file('/static/{}'.format(filename), as_attachment=True)
+    return send_file('/upload/{}'.format(filename), as_attachment=True)
     #return send_from_directory(server.config['UPLOAD_FOLDER'], filename)
 
 @server.route("/")
