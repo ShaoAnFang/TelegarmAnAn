@@ -135,8 +135,8 @@ def returnImage(filename):
 @server.route("/")
 def webhook():
     bot.remove_webhook()
-    #bot.set_webhook(url='https://telegarm-anan.herokuapp.com/' + TOKEN)
-    bot.set_webhook(url='https://ee36f7c6dae9.ngrok.io/' + TOKEN)
+    bot.set_webhook(url='https://telegarm-anan.herokuapp.com/' + TOKEN)
+    #bot.set_webhook(url='https://ee36f7c6dae9.ngrok.io/' + TOKEN)
     return "!", 200
 
 
