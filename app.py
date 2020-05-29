@@ -34,8 +34,7 @@ def echo_message(message):
         markup.add(types.InlineKeyboardButton("Google", url='http://www.google.com'))
 
         #也可以傳圖片的網址
-        
-        #bot.send_photo(chat_id, "FILEID")
+        bot.send_photo(chat_id, "https://www.google.com/url?sa=i&url=https%3A%2F%2Fvocus.cc%2Facgntalk%2F5ae7dd37fd89780001a05755&psig=AOvVaw1tHmgG4-XKapNEfcMOTPW1&ust=1590807006141000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCLDL4IaI2OkCFQAAAAAdAAAAABAM")
 
     elif message.text == "電影" :
         moviesList = mv.get_movies()
@@ -93,7 +92,7 @@ def echo_message(message):
                    types.InlineKeyboardButton(f"{ message.text } CLICK 2", callback_data='clicked'))
 
         markup.add(types.InlineKeyboardButton("Google", url='http://www.google.com'))
-        bot.send_message(chat_id, "InlineKeyboardButton", reply_markup=markup)
+        bot.send_message(chat_id, "目前只有電影和星座 其他都是Echo", reply_markup=markup)
 
 
 @bot.callback_query_handler(func=lambda call: call.data == 'clicked')
